@@ -19,11 +19,16 @@ Basically just what I needed for a personal project, plus some additions I need 
           self == that
         end
       end
+
+      role :advanced do
+        can :do_advanced_stuff
+      end
     end
 
     user = User.new
 
     user.can?(:do_this) # => true
+    user.can?(:do_advanced_suff) # => false
     user.can?(:do_that, 'I am not a user') # => false
     user.can?(:do_that, user) # => true
 
