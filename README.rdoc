@@ -1,6 +1,32 @@
 = simple_roles
 
-Description goes here.
+Simple roles for your classes. Heavily based on Pat Nakajima's Roleful (http://github.com/nakajima/roleful), but with less features and less metaprogramming.
+
+Basically just what I needed for a personal project, plus some additions I need (TODO).
+
+== Usage
+
+    class User
+      include SimpleRoles
+      
+      def role
+        :basic
+      end
+
+      role :basic do
+        can :do_this
+        can :do_that do |that|
+          self == that
+        end
+      end
+    end
+
+    user = User.new
+
+    user.can?(:do_this) # => true
+    user.can?(:do_that, 'I am not a user') # => false
+    user.can?(:do_that, user) # => true
+
 
 == Copyright
 
